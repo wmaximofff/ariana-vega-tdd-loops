@@ -8,6 +8,7 @@ import {
   sumOddsToN,
   getGrowthTime,
   getCompoundTime,
+  moveWater,
   fizzbuzz,
 } from "./index.js";
 
@@ -167,6 +168,29 @@ describe("getCompoundTime", function () {
   });
   it("returns correct years for larger values", function () {
     expect(getCompoundTime(2000, 0.05, 5000)).toBe(19);
+  });
+});
+
+describe("moveWater", function () {
+  it("returns undefined if colander <= 0", () => {
+    expect(moveWater(0, 10)).toBeUndefined();
+    expect(moveWater(-3, 10)).toBeUndefined();
+  });
+  it("returns 0 if bucket <= 0", () => {
+    expect(moveWater(5, 0)).toBe(0);
+    expect(moveWater(5, -2)).toBe(0);
+  });
+  it("returns 1 if colander >= bucket", () => {
+    expect(moveWater(5, 5)).toBe(1);
+    expect(moveWater(7, 3)).toBe(1);
+  });
+  it("returns bucket if colander = 1", () => {
+    expect(moveWater(1, 987654321)).toBe(987654321);
+  });
+  it("returns correct trips", () => {
+    expect(moveWater(5, 18)).toBe(8);
+    expect(moveWater(5, 11)).toBe(3);
+    expect(moveWater(3, 6)).toBe(3);
   });
 });
 
